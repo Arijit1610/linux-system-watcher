@@ -11,6 +11,16 @@ if [[ $UID -ne 0 ]]; then
     exit 1
 fi
 
+for cmd in mpstat iostat vmstat mail
+do
+    command -v "$cmd" >/dev/null || {
+        echo "$cmd not found"
+        exit 1
+    }
+done
+
+
+
 # Prevent multiple runs
 #uncommment if not running as system process
 #if [[ -f "$LOCK" ]]; then
@@ -25,27 +35,27 @@ echo "Starting watcher at $(/usr/bin/date)" >> "$logfile"
 # Start collectors
 bash $BASE/collectors/top.sh >> "$logfile" 2>&1 &
 echo "starting collection of top" >> "$logfile"
-echo $! > $BASE/collectors/top.pid
+#echo $! > $BASE/collectors/top.pid
 
 bash $BASE/collectors/vmstat.sh >> "$logfile" 2>&1 &
 echo "starting collection of vmstat" >> "$logfile"
-echo $! > $BASE/collectors/vmstat.pid
+#echo $! > $BASE/collectors/vmstat.pid
 
 bash $BASE/collectors/iostat.sh >> "$logfile" 2>&1 &
 echo "starting collection of iostat" >> "$logfile"
-echo $! > $BASE/collectors/iostat.pid
+#echo $! > $BASE/collectors/iostat.pid
 
 bash $BASE/collectors/free.sh >> "$logfile" 2>&1 &
 echo "starting collection of free" >> "$logfile"
-echo $! > $BASE/collectors/free.pid
+#echo $! > $BASE/collectors/free.pid
 
 bash $BASE/collectors/df.sh >> "$logfile" 2>&1 &
 echo "starting collection of df" >> "$logfile"
-echo $! > $BASE/collectors/df.pid
+#echo $! > $BASE/collectors/df.pid
 
 bash $BASE/archive/archive.sh >> "$logfile" 2>&1 &
 echo "starting archiving script" >> "$logfile"
-echo $! > $BASE/archive/archive.pid
+#echo $! > $BASE/archive/archive.pid
 
 ##ALERT SCRIPT##
 

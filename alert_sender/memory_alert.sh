@@ -50,7 +50,7 @@ do
     then
         alert_sent=1
         occurrence=0
-	echo "MEMORY ALERT SENT: $(date) ---> usage: $memory_usage" >> "$logile"
+	echo "MEMORY ALERT SENT: $(date) ---> usage: $memory_usage" >> "$logfile"
         top_process=$(ps -eo pid,ppid,cmd,%mem --sort=-%mem | head -n 11)
         printf "ALERT: memory Usage Alert\nServer: %s\nUsage: %s%%\nTime: %s\n \nTop Process: \n%s\n " "$(hostname)" "$memory_usage" "$(date)" "$top_process" | mail -s "$(hostname):High memory sage Alert" "$EMAIL"
     fi

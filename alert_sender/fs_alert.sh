@@ -5,7 +5,6 @@ source /opt/watcher/config.cfg
 STATE_DIR="/tmp/fs_alert"
 logfile="$LOG/alertlogger_fs.log"
 mkdir -p "$STATE_DIR"
-EMAIL=annandy2002@gmail.com
 while true
 do
 	df -h| grep -vEi "mount|tmpfs" | while read -r line

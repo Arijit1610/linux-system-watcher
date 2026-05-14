@@ -1,7 +1,7 @@
 #!/bin/bash
 source /opt/watcher/config.cfg
 logfile="$LOG/archive.log"
-
+retention_minutes=$((RETENTION_HOURS * 60))
 mkdir -p $LOG
 
 if [[ $UID -ne 0 ]]; then
@@ -43,7 +43,7 @@ do
 	archive_dir "wtvmstat" "vmstat"
 	echo "-----archiving completed-----" >> "$logfile"
 	echo "----deleting old files----" >> "$logfile"
-	find $path/*/ -name "*.tar.gz" -type f -mmin +1440 -print -delete >> "$logfile"
+	find $path/*/ -name "*.tar.gz" -type f -mmin +"$retention_minutes"  -print -delete >> "$logfile"
 	echo "----deletion complete going for sleep 30 mins------" >> "$logfile" 
 	sleep 1800   # run every 30 minutes
 	
