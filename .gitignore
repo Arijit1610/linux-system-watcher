@@ -1,0 +1,6 @@
+logs/
+data/
+*.pid
+*.tar.gz
+*.log
+.startfile
