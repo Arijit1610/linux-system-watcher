@@ -210,13 +210,10 @@ Example:
 # Future Improvements
 
 * Web dashboard for graphical monitoring
-* REST API integration
+* FAST API integration
 * Database-based metric storage
-* Prometheus exporter support
-* RPM packaging automation
 * Real-time visualization using Python/Flask
-* Slack/Teams webhook alerts
-
+  
 ---
 
 # Learning Outcomes
